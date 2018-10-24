@@ -1,0 +1,24 @@
+import carreras.*
+import estudiantes.*
+import materias.*
+
+describe "Simulacro Inscripcion Materias" {
+	//carreras
+	const informatica = new Carrera()
+	//materias
+	const objetos1 = new Materia(nombreMateria="obj1", )
+	//estudiantes
+	const alum01 = new Estudiante()
+	const alum02 = new Estudiante()
+	const alum03 = new Estudiante()
+	
+	fixture {
+			
+	}
+
+	test "Ejercicio 1" {
+
+		assert.that(true)
+
+	}
+}
