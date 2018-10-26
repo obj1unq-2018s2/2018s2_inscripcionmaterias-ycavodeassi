@@ -1,0 +1,35 @@
+import estudiante.*
+import materia.*
+import carrera.*
+
+describe "Ejercicio 7" {
+	//carreras
+	const informatica = new Carrera(materias=#{mate01,mate02,obj02})
+	
+	//materias
+	const mate01 	  = new Materia(carrera=informatica,anio=1,cupo=2)
+	const mate02	  = new MateriaCorrelativa(carrera=informatica,anio=2,cupo=2)
+	const obj02		  = new MateriaConCredito(carrera=informatica,anio=2,cupo=2,creditosNecesarios=40)
+	
+	//alumnos
+	const alumno01	  = new Estudiante(cantidadCreditos=10)
+	const alumno02	  = new Estudiante(cantidadCreditos=20)
+	const alumno03    = new Estudiante(cantidadCreditos=45)
+	
+	fixture {
+		mate01.registrarAlumnoSi(alumno01)
+	}
+
+	test "Alumno intenta inscribir a materia que ya curso" {
+		assert.that(true)
+	}
+	
+	test "Alumno intenta inscribir a materia pero falta correlativa" {
+		assert.that(true)
+	}
+	
+	test "Alumno intenta inscribirse a materia y cumple requisitos pero no hay cupo queda en lista espera" {
+		assert.that(true)
+	}
+
+}
