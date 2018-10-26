@@ -5,8 +5,10 @@ class Estudiante {
 	const carrerasCursando  = #{} 	//conjunto de carreras que el alumno esta cursando.
 	const materiasInscripto = #{} 	//conjunto de materias que el alumno esta inscripto.
 	const materiasAprobadas = #{}	//conjunto de materias que el alumno aprobo.
+	const materiasEspera	= #{}   //conjunto de materias que el alumno esta en lista de espera.
 	var	  notas				= []    //lista de notas
 	var	  cantidadCreditos			//num
+	
 	
 	method materiasInscripto() 				   = materiasInscripto
 	
@@ -33,10 +35,12 @@ class Estudiante {
 	
 	method estaCursandoCarrera(unaCarrera)     = carrerasCursando.contains(unaCarrera)
 	
-	method tieneCreditos(unCredito)		       = unCredito == cantidadCreditos
+	method tieneCreditos(unCredito)		       = cantidadCreditos >= unCredito
+	//Quiero agregar al conjunto de materiasEspera para luego mostrar todas las materias que el alumno esta en lista de espera, pero de todas las carreras que cursa.
+	method addMateriasDeListaEsperaCarreras()  { carrerasCursando.forEach{ carrera => materiasEspera.add(carrera.materiasEnEspera(self)) } }
 	
-	method enListaDeEspera()				   = carrerasCursando.forEach().materias().filter{ materia => materia.estaEnEspera(self) }
-	
+	method materiasEspera() 			       = materiasEspera
+									 
 	method materiasPuedeInscribir(unaCarrera)  = if(self.estaCursandoCarrera(unaCarrera)) 
 													unaCarrera.materias()
 												 else 

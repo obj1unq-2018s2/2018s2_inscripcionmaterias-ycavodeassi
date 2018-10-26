@@ -36,7 +36,7 @@ class Materia {
 													self.regAlumEspera(unEstudiante)
 											}
 											
-	method regAlumEspera(unEstudiante)      { 	listaEspera.add(unEstudiante).withoutDuplicates()	}
+	method regAlumEspera(unEstudiante)      { 	listaEspera.add(unEstudiante)	}
 	
 	method bajaAlumnoSi(unEstudiante) 		{
 												if(unEstudiante.estaInscripto(self))
@@ -54,7 +54,7 @@ class Materia {
 	
 	method estaEnEspera(unEstudiante)	 = listaEspera.contains(unEstudiante)
 	
-	method hayCupo()					 = self.cupo()<self.cursantes()														
+	method hayCupo()					 = self.cursantes().size()<self.cupo()														
 }
 
 class MateriaCorrelativa inherits Materia {

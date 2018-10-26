@@ -4,32 +4,44 @@ import carrera.*
 
 describe "Ejercicio 7" {
 	//carreras
-	const informatica = new Carrera(materias=#{mate01,mate02,obj02})
-	
+	const informatica = new Carrera()
+
 	//materias
 	const mate01 	  = new Materia(carrera=informatica,anio=1,cupo=2)
-	const mate02	  = new MateriaCorrelativa(carrera=informatica,anio=2,cupo=2)
-	const obj02		  = new MateriaConCredito(carrera=informatica,anio=2,cupo=2,creditosNecesarios=40)
+	const mate02	  = new MateriaCorrelativa(carrera=informatica,anio=2,cupo=2,materiasNecesarias=#{mate01})
+	const obj02		  = new MateriaConCredito(carrera=informatica,anio=2,cupo=0,creditosNecesarios=40)
 	
 	//alumnos
-	const alumno01	  = new Estudiante(cantidadCreditos=10)
-	const alumno02	  = new Estudiante(cantidadCreditos=20)
-	const alumno03    = new Estudiante(cantidadCreditos=45)
+	const alumno01	  = new Estudiante(cantidadCreditos=10, carrerasCursando=#{informatica})
+	const alumno02	  = new Estudiante(cantidadCreditos=20, carrerasCursando=#{informatica})
+	const alumno03    = new Estudiante(cantidadCreditos=45, carrerasCursando=#{informatica})
+	
+		
 	
 	fixture {
+		informatica.agregarMateria(mate01)
+		informatica.agregarMateria(mate02)
+		informatica.agregarMateria(obj02)
+		//
 		mate01.registrarAlumnoSi(alumno01)
+		//
+		obj02.registrarAlumnoSi(alumno03)
+		
 	}
 
 	test "Alumno intenta inscribir a materia que ya curso" {
-		assert.that(true)
+		assert.notThat(mate01.puedeCursar(alumno01))
 	}
 	
 	test "Alumno intenta inscribir a materia pero falta correlativa" {
-		assert.that(true)
+		assert.notThat(mate02.aproboCorrelativas(alumno02))
+		assert.notThat(mate02.puedeCursar(alumno02))
 	}
 	
 	test "Alumno intenta inscribirse a materia y cumple requisitos pero no hay cupo queda en lista espera" {
-		assert.that(true)
+		assert.that(obj02.puedeCursar(alumno03))
+		assert.notThat(obj02.hayCupo())
+		assert.that(obj02.estaEnEspera(alumno03))
 	}
 
 }

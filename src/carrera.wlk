@@ -5,5 +5,10 @@ class Carrera {
 	
 	method materias() = materias
 	
-	method materiasHastaAnio(unAnio) = materias.filter{ materia => materia.anio() < unAnio }
+	method agregarMateria(unaMateria) = materias.add(unaMateria)
+	
+	method materiasHastaAnio(unAnio)  = materias.filter{ materia => materia.anio() < unAnio }
+	
+	method materiasEnEspera(unEstudiante) = materias.filter{ materia => materia.estaEnEspera(unEstudiante) }
+	
 }
